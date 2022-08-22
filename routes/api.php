@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PictureController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,6 @@ Route::delete('/pictures/{id}/delete', [PictureController::class, 'destroy']);
 
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/user', [UserController::class, 'userLogged'])->middleware('frontend');
+
+Route::post('/chat', [MessageController::class, 'store']);
+Route::get('/chat/{id}', [MessageController::class, 'show']);
