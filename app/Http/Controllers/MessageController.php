@@ -2,19 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Message;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
+
+    public function index()
+    {
+        // return view('plan', [
+        //     'user' => Auth::user(),
+        //     'plans' => $plans = Plan::all()
+        // ]);
+
+        $message = Message::all();
+
+        return response()->json($message);
+    }
+
+
+   
+
     public function store(Request $request)
     {
-        $message = Message::create([
-            'body' => $request->input('message'),            
-            'user_id' => 1,
+        $token = $request->header('API-TOKEN');        
+
+        if($token === User::where('api_token', $token)) {            
+
+            return response()->json([ 'token' => $token]);
+        }
+
+        return response()->json([ 
+            'error' => "out of the condition",
         ]);
 
-        return response()->json($request->all());
     }
 
     public function show($id)

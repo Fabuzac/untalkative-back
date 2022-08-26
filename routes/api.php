@@ -30,5 +30,6 @@ Route::delete('/pictures/{id}/delete', [PictureController::class, 'destroy']);
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/user', [UserController::class, 'userLogged'])->middleware('frontend');
 
+Route::get('/message', [MessageController::class, 'index']);
 Route::post('/chat', [MessageController::class, 'store']);
 Route::get('/chat/{id}', [MessageController::class, 'show']);
